@@ -11,14 +11,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # --------------------
-      # 1. Clean Docker space
-      # --------------------
-      - name: Clean Docker
-        run: |
-          docker system prune -af
-          docker volume prune -f
-  
+        
 
       # --------------------
       # 1. Security Scan Before Build
@@ -42,15 +35,16 @@ jobs:
       # --------------------
       # 3. Security Scan After Build
       # --------------------
-      - #name: Trivy Image Scan (Docker image scan)
-        #uses: aquasecurity/trivy-action@master
-        #with:
-          #scan-type: image
-          #image-ref: ${{ secrets.DOCKER_IMAGE }}:${{ github.sha }}
-          #ignore-unfixed: true
-          #format: table
-          #severity: HIGH,CRITICAL
-          #exit-code: 0
+      - name: Trivy Image Scan (Docker image scan)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: image
+          image-ref: ${{ secrets.DOCKER_IMAGE }}:${{ github.sha }}
+          ignore-unfixed: true
+          format: table
+          severity: HIGH,CRITICAL
+          exit-code: 0
+          
 
       # -------------------
       # 5. Push Docker image
@@ -63,7 +57,12 @@ jobs:
           docker push ${{ secrets.DOCKER_IMAGE }}:${{ github.sha }}
           docker tag ${{ secrets.DOCKER_IMAGE }}:${{ github.sha }} ${{ secrets.DOCKER_IMAGE }}:latest
           docker push ${{ secrets.DOCKER_IMAGE }}:latest
-
+      # 1. Clean Docker space
+      # --------------------
+      - name: Clean Docker
+        run: |
+          docker system prune -af
+          docker volume prune -f
   deploy:
     runs-on: ubuntu-latest
     needs: build
