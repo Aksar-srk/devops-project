@@ -18,11 +18,11 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: fs
+          input: .
           ignore-unfixed: true
           format: table
           severity: HIGH,CRITICAL
           exit-code: 0
-          path: .
 
       # --------------------
       # 2. Build Docker image
@@ -37,25 +37,20 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
+          image-ref: ${{ secrets.DOCKER_IMAGE }}:${{ github.sha }}
           ignore-unfixed: true
           format: table
           severity: HIGH,CRITICAL
           exit-code: 0
-          image-ref: ${{ secrets.DOCKER_IMAGE }}:${{ github.sha }}
 
       # --------------------
-      # 4. SonarQube Scan
+      # 4. SonarQube Scan (Self-Hosted on EC2)
       # --------------------
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
-        with:
-          args: >
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.organization=${{ secrets.SONAR_ORG }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: http://<EC2_PUBLIC_IP>:9000   # if using your EC2 SonarQube
-          # or https://sonarcloud.io if using SonarCloud
+          SONAR_HOST_URL: http://${{ secrets.EC2_HOST }}:9000
 
       # --------------------
       # 5. Push Docker image
