@@ -56,7 +56,7 @@ jobs:
       - name: SonarQube Scan
         run: |
           sonar-scanner \
-            -Dsonar.projectKey=devops-project \
+            -Dsonar.projectKey=swiggy-app \
             -Dsonar.sources=. \
             -Dsonar.host.url=http://52.205.108.187:9000 \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
