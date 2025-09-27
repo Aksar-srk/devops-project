@@ -53,13 +53,14 @@ jobs:
           mv sonar-scanner-5.0.1.3006-linux sonar-scanner
           echo "${GITHUB_WORKSPACE}/sonar-scanner/bin" >> $GITHUB_PATH
 
-      - name: Run SonarQube Scan
+      - name: SonarQube Scan
         run: |
           sonar-scanner \
-            -Dsonar.host.url=http://${{ secrets.EC2_HOST }}:9000 \
+            -Dsonar.projectKey=devops-project \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=http://52.205.108.187:9000 \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
 
       # --------------------
       # 5. Push Docker image
