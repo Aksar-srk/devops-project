@@ -46,11 +46,20 @@ jobs:
       # --------------------
       # 4. SonarQube Scan (Self-Hosted on EC2)
       # --------------------
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
+      - name: Install Sonar Scanner
+        run: |
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+          unzip sonar-scanner-cli-5.0.1.3006-linux.zip
+          mv sonar-scanner-5.0.1.3006-linux sonar-scanner
+          echo "${GITHUB_WORKSPACE}/sonar-scanner/bin" >> $GITHUB_PATH
+
+      - name: Run SonarQube Scan
+        run: |
+          sonar-scanner \
+            -Dsonar.host.url=http://${{ secrets.EC2_HOST }}:9000 \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: http://${{ secrets.EC2_HOST }}:9000
 
       # --------------------
       # 5. Push Docker image
