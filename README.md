@@ -81,14 +81,17 @@ Once testing in dev is complete:
 - # Merge workflow (via GitHub PR)
 - feature-branch → dev → main
 - ✅ Final Workflow Diagram
-- feature-docker ─────┐
-- feature-swiggy-setup ──┐
+```css
+ feature-docker ─────┐
+ feature-swiggy-setup ──┐
                        │
                        ▼
                      [ dev ]
                        │
                        ▼
                      [ main ]
+```
+                     
 
 ### Notes
 - Always create new features in feature-* branches.
