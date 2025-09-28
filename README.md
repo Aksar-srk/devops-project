@@ -65,15 +65,27 @@ git branch
 - Open Pull Request (PR) from feature-* → dev
 - Team reviews code
 - If approved → Click Merge Pull Request
+![AWS EC2 Security Group](images/pr.png)
+
 
 ## 🔹 Step 6: Merge Feature → Dev
-```bash
+
 # On GitHub via PR
 feature-swiggy-setup → dev
-```
+
 
 ## 🔹 Step 7: Merge Dev → Main (Production)
 Once testing in dev is complete:
+![AWS EC2 Security Group](images/ci-cd-fail-2.png)
+![AWS EC2 Security Group](images/ci-cd-fail-3.png)
+
+- After testing and fixing eror
+
+![AWS EC2 Security Group](images/ci-cd-pass.png)
+![AWS EC2 Security Group](images/ci-cd-pass-2.png)
+
+
+
 
 # On GitHub via PR
 - dev → main
