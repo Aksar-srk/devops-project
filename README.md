@@ -108,7 +108,6 @@ git tag -a v1.0.0 -m "Release v1.0.0 - stable tested version"
 # 7. Push tags to GitHub
 git push origin v1.0.0
 ```
-![AWS EC2 Security Group](images/final.png)
 
 # On GitHub via PR
 - dev → main
