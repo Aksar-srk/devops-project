@@ -61,10 +61,10 @@ git branch
 ```
 ## 🔹 Step 5: Pull Request Workflow
 
-1.Push feature branch to GitHub
-2.Open Pull Request (PR) from feature-* → dev
-3.Team reviews code
-4.If approved → Click Merge Pull Request
+- Push feature branch to GitHub
+- Open Pull Request (PR) from feature-* → dev
+- Team reviews code
+- If approved → Click Merge Pull Request
 
 ## 🔹 Step 6: Merge Feature → Dev
 ```bash
@@ -76,13 +76,13 @@ feature-swiggy-setup → dev
 Once testing in dev is complete:
 
 # On GitHub via PR
-dev → main
-This makes the project stable and production-ready.
-# Merge workflow (via GitHub PR)
-feature-branch → dev → main
-✅ Final Workflow Diagram
-feature-docker ─────┐
-feature-swiggy-setup ──┐
+- dev → main
+- This makes the project stable and production-ready.
+- # Merge workflow (via GitHub PR)
+- feature-branch → dev → main
+- ✅ Final Workflow Diagram
+- feature-docker ─────┐
+- feature-swiggy-setup ──┐
                        │
                        ▼
                      [ dev ]
@@ -91,11 +91,11 @@ feature-swiggy-setup ──┐
                      [ main ]
 
 ### Notes
-Always create new features in feature-* branches.
-Merge to dev after review.
-Merge dev → main only after testing.
-.gitignore is used to avoid unnecessary files.
-Tags can be used for versioning:
+- Always create new features in feature-* branches.
+- Merge to dev after review.
+- Merge dev → main only after testing.
+- .gitignore is used to avoid unnecessary files.
+- Tags can be used for versioning:
 ```bash
 git tag v1.0
 git push origin v1.0
