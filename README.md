@@ -85,7 +85,30 @@ Once testing in dev is complete:
 ![AWS EC2 Security Group](images/ci-cd-pass-2.png)
 
 
+## 🚀 Merging Tested Code from dev to main with Tags
+- Once all features are tested in the dev branch, follow these steps to merge them into main and create a release tag:
+```bash
+# 1. Switch to main branch
+git checkout main
 
+# 2. Pull the latest changes
+git pull origin main
+
+# 3. Merge tested code from dev branch
+git merge dev
+
+# 4. Resolve any merge conflicts if they appear, then commit.
+
+# 5. Push merged changes to GitHub
+git push origin main
+
+# 6. Create a version tag (example: v1.0.0)
+git tag -a v1.0.0 -m "Release v1.0.0 - stable tested version"
+
+# 7. Push tags to GitHub
+git push origin v1.0.0
+```
+![AWS EC2 Security Group](images/final.png)
 
 # On GitHub via PR
 - dev → main
